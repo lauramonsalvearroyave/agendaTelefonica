@@ -4,11 +4,11 @@ const persons = require('./../persons')
 
 
 
-router.get('/', (req, res) => {
-    res.send('Esta es la versón mejorada de Juan Pablo y Laura M')
-})
+//router.get('/', (req, res) => {
+    //res.send('Esta es la versón mejorada de Juan Pablo y Laura M')
+//})
 
-router.get('/api/persons', (req, res) => {
+router.get('/', (req, res) => {
     res.json(persons)
 })
 
@@ -18,20 +18,20 @@ router.get('/info', (req, res) => {
     res.send(`Phonebook has info for ${quantity} people <br> <br> ${date} `)
 })
 
-router.get('/api/persons/:id', (req, res) => {
+router.get('/:id', (req, res) => {
     const { id } = req.params
     const person = persons.find(person => person.id === Number(id))
     if (person) { res.json(person) } else { res.status(404).end() }
 })
 
-router.delete('/api/persons/:id', (req, res) => {
+router.delete('/:id', (req, res) => {
     const { id } = req.params
     const personsFiltered = persons.filter(person => person.id !== Number(id))
     res.status(200).json(personsFiltered)
     //res.status(204).end()
 })
 
-router.post('/api/persons/', (req, res) => {
+router.post('/', (req, res) => {
     const payload = req.body;
     if (!payload.name) {
         res.status(400).send({ error: "missing name" })
